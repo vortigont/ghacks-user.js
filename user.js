@@ -1,3 +1,29 @@
+// ********** General profile Settings *******
+
+// misc settings
+// disable updating system addons
+user_pref("extensions.systemAddon.update.enabled", false);
+user_pref("devtools.aboutdebugging.showSystemAddons", true);
+
+// this is required for JIRA
+user_pref("dom.storage.enabled", true);
+
+// disable experimental features
+user_pref("experiments.supported", false);
+user_pref("experiments.enabled", false);
+user_pref("experiments.activeExperiment", false);
+user_pref("experiments.manifest.uri", "");
+// disable health reporting
+user_pref("browser.selfsupport.url", "");
+user_pref("browser.tabs.crashReporting.sendReport", false);
+user_pref("security.ssl.errorReporting.enabled", false);
+user_pref("datareporting.healthreport.service.enabled", false);
+user_pref("datareporting.healthreport.logging.consoleEnabled", false);
+user_pref("datareporting.policy.dataSubmissionEnabled", false);
+user_pref("datareporting.policy.dataSubmissionEnabled.v2", false);
+
+
+
 /******
 * name: ghacks user.js
 * date: 15 February 2020
@@ -96,15 +122,15 @@ user_pref("browser.shell.checkDefaultBrowser", false);
 /* 0102: set START page (0=blank, 1=home, 2=last visited page, 3=resume previous session)
  * [NOTE] Session Restore is not used in PB mode (0110) and is cleared with history (2803, 2804)
  * [SETTING] General>Startup>Restore previous session ***/
-user_pref("browser.startup.page", 0);
+user_pref("browser.startup.page", 3);
 /* 0103: set HOME+NEWWINDOW page
  * about:home=Activity Stream (default, see 0105), custom URL, about:blank
  * [SETTING] Home>New Windows and Tabs>Homepage and new windows ***/
-user_pref("browser.startup.homepage", "about:blank");
+user_pref("browser.startup.homepage", "about:home");
 /* 0104: set NEWTAB page
  * true=Activity Stream (default, see 0105), false=blank page
  * [SETTING] Home>New Windows and Tabs>New tabs ***/
-user_pref("browser.newtabpage.enabled", false);
+//user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
 /* 0105: disable Activity Stream stuff (AS)
  * AS is the default homepage/newtab in FF57+, based on metadata and browsing behavior.
@@ -143,7 +169,7 @@ user_pref("_user.js.parrot", "0200 syntax error: the parrot's definitely decease
 /* 0201: disable Location-Aware Browsing
  * [NOTE] Best left at default "true", fingerprintable, is already behind a prompt (see 0202)
  * [1] https://www.mozilla.org/firefox/geolocation/ ***/
-   // user_pref("geo.enabled", false);
+user_pref("geo.enabled", false);
 /* 0202: set a default permission for Location (see 0201) [FF58+]
  * 0=always ask (default), 1=allow, 2=block
  * [NOTE] Best left at default "always ask", fingerprintable via Permissions API
@@ -172,17 +198,17 @@ user_pref("browser.search.geoSpecificDefaults.url", "");
 /** LANGUAGE / LOCALE ***/
 /* 0210: set preferred language for displaying web pages
  * [TEST] https://addons.mozilla.org/about ***/
-user_pref("intl.accept_languages", "en-US, en");
+//user_pref("intl.accept_languages", "en-US, en");
 /* 0211: enforce US English locale regardless of the system locale
  * [1] https://bugzilla.mozilla.org/867501 ***/
-user_pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
+//user_pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
 /* 0212: enforce fallback text encoding to match en-US
  * When the content or server doesn't declare a charset the browser will
  * fallback to the "Current locale" based on your application language
  * [SETTING] General>Language and Appearance>Fonts and Colors>Advanced>Text Encoding for Legacy Content
  * [TEST] https://hsivonen.com/test/moz/check-charset.htm
  * [1] https://trac.torproject.org/projects/tor/ticket/20025 ***/
-user_pref("intl.charset.fallback.override", "windows-1252");
+//user_pref("intl.charset.fallback.override", "windows-1252");
 
 /*** [SECTION 0300]: QUIET FOX
      Starting in user.js v67, we only disable the auto-INSTALL of Firefox. You still get prompts
@@ -297,12 +323,12 @@ user_pref("extensions.blocklist.url", "https://blocklists.settings.services.mozi
 /* 0410: disable SB (Safe Browsing)
  * [WARNING] Do this at your own risk! These are the master switches.
  * [SETTING] Privacy & Security>Security>... "Block dangerous and deceptive content" ***/
-   // user_pref("browser.safebrowsing.malware.enabled", false);
-   // user_pref("browser.safebrowsing.phishing.enabled", false);
+user_pref("browser.safebrowsing.malware.enabled", false);
+user_pref("browser.safebrowsing.phishing.enabled", false);
 /* 0411: disable SB checks for downloads (both local lookups + remote)
  * This is the master switch for the safebrowsing.downloads* prefs (0412, 0413)
  * [SETTING] Privacy & Security>Security>... "Block dangerous downloads" ***/
-   // user_pref("browser.safebrowsing.downloads.enabled", false);
+user_pref("browser.safebrowsing.downloads.enabled", false);
 /* 0412: disable SB checks for downloads (remote)
  * To verify the safety of certain executable files, Firefox may submit some information about the
  * file, including the name, origin, size and a cryptographic hash of the contents, to the Google
@@ -312,8 +338,8 @@ user_pref("browser.safebrowsing.downloads.remote.enabled", false);
 user_pref("browser.safebrowsing.downloads.remote.url", "");
 /* 0413: disable SB checks for unwanted software
  * [SETTING] Privacy & Security>Security>... "Warn you about unwanted and uncommon software" ***/
-   // user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
-   // user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
+user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
+user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
 /* 0419: disable 'ignore this warning' on SB warnings
  * If clicked, it bypasses the block for that session. This is a means for admins to enforce SB
  * [TEST] see github wiki APPENDIX A: Test Sites: Section 5
@@ -361,10 +387,10 @@ user_pref("browser.ping-centre.telemetry", false);
  * [SETTING] Privacy & Security>Forms and Autofill>Autofill addresses (FF74+)
  * [1] https://wiki.mozilla.org/Firefox/Features/Form_Autofill
  * [2] https://www.ghacks.net/2017/05/24/firefoxs-new-form-autofill-is-awesome/ ***/
-user_pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
-user_pref("extensions.formautofill.available", "off"); // [FF56+]
+//user_pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
+//user_pref("extensions.formautofill.available", "off"); // [FF56+]
 user_pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
-user_pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
+//user_pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
 /* 0518: disable Web Compatibility Reporter [FF56+]
  * Web Compatibility Reporter adds a "Report Site Issue" button to send data to Mozilla ***/
 user_pref("extensions.webcompat-reporter.enabled", false);
@@ -403,7 +429,7 @@ user_pref("_user.js.parrot", "0700 syntax error: the parrot's given up the ghost
  * [TEST] https://ipleak.org/
  * [1] https://github.com/ghacksuserjs/ghacks-user.js/issues/437#issuecomment-403740626
  * [2] https://www.internetsociety.org/tag/ipv6-security/ (see Myths 2,4,5,6) ***/
-user_pref("network.dns.disableIPv6", true);
+//user_pref("network.dns.disableIPv6", true);
 /* 0702: disable HTTP2
  * HTTP2 raises concerns with "multiplexing" and "server push", does nothing to
  * enhance privacy, and opens up a number of server-side fingerprinting opportunities.
@@ -437,7 +463,7 @@ user_pref("network.proxy.socks_remote_dns", true);
 /* 0709: disable using UNC (Uniform Naming Convention) paths [FF61+]
  * [SETUP-CHROME] Can break extensions for profiles on network shares
  * [1] https://trac.torproject.org/projects/tor/ticket/26424 ***/
-user_pref("network.file.disable_unc_paths", true); // [HIDDEN PREF]
+//user_pref("network.file.disable_unc_paths", true); // (hidden pref)
 /* 0710: disable GIO as a potential proxy bypass vector
  * Gvfs/GIO has a set of supported protocols like obex, network, archive, computer, dav, cdda,
  * gphoto2, trash, etc. By default only smb and sftp protocols are accepted so far (as of FF64)
@@ -445,7 +471,8 @@ user_pref("network.file.disable_unc_paths", true); // [HIDDEN PREF]
  * [2] https://trac.torproject.org/23044
  * [3] https://en.wikipedia.org/wiki/GVfs
  * [4] https://en.wikipedia.org/wiki/GIO_(software) ***/
-user_pref("network.gio.supported-protocols", ""); // [HIDDEN PREF]
+//user_pref("network.gio.supported-protocols", ""); // (hidden pref)
+
 
 /*** [SECTION 0800]: LOCATION BAR / SEARCH BAR / SUGGESTIONS / HISTORY / FORMS
      Change items 0850 and above to suit for privacy vs convenience and functionality. Consider
@@ -482,12 +509,12 @@ user_pref("browser.urlbar.trimURLs", false);
  * [1] https://dbaron.org/mozilla/visited-privacy
  * [2] https://bugzilla.mozilla.org/147777
  * [3] https://developer.mozilla.org/docs/Web/CSS/Privacy_and_the_:visited_selector ***/
-user_pref("layout.css.visited_links_enabled", false);
+//user_pref("layout.css.visited_links_enabled", false);
 /* 0807: disable live search suggestions
 /* [NOTE] Both must be true for the location bar to work
  * [SETUP-CHROME] Change these if you trust and use a privacy respecting search engine
  * [SETTING] Search>Provide search suggestions | Show search suggestions in address bar results ***/
-user_pref("browser.search.suggest.enabled", false);
+//user_pref("browser.search.suggest.enabled", false);
 user_pref("browser.urlbar.suggest.searches", false);
 /* 0809: disable location bar suggesting "preloaded" top websites [FF54+]
  * [1] https://bugzilla.mozilla.org/1211726 ***/
@@ -498,9 +525,9 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
 /* 0850a: disable location bar suggestion types
  * If all three suggestion types are false, search engine keywords are disabled
  * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest ***/
-   // user_pref("browser.urlbar.suggest.history", false);
-   // user_pref("browser.urlbar.suggest.bookmark", false);
-   // user_pref("browser.urlbar.suggest.openpage", false);
+//user_pref("browser.urlbar.suggest.history", false);
+//user_pref("browser.urlbar.suggest.bookmark", false);
+//user_pref("browser.urlbar.suggest.openpage", false);
 /* 0850c: disable location bar dropdown
  * This value controls the total number of entries to appear in the location bar dropdown
  * [NOTE] Items (bookmarks/history/openpages) with a high "frecency"/"bonus" will always
@@ -514,7 +541,7 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
    // user_pref("browser.urlbar.autoFill", false);
 /* 0850e: disable location bar one-off searches [FF51+]
  * [1] https://www.ghacks.net/2016/08/09/firefox-one-off-searches-address-bar/ ***/
-   // user_pref("browser.urlbar.oneOffSearches", false);
+//user_pref("browser.urlbar.oneOffSearches", false);
 /* 0860: disable search and form history
  * [SETUP-WEB] Be aware thet autocomplete form data can be read by third parties, see [1] [2]
  * [NOTE] We also clear formdata on exit (see 2803)
@@ -527,12 +554,13 @@ user_pref("browser.formfill.enable", false);
  * [SETTING] Privacy & Security>History>Custom Settings>Remember browsing and download history ***/
    // user_pref("places.history.enabled", false);
 /* 0870: disable Windows jumplist [WINDOWS] ***/
-user_pref("browser.taskbar.lists.enabled", false);
-user_pref("browser.taskbar.lists.frequent.enabled", false);
-user_pref("browser.taskbar.lists.recent.enabled", false);
-user_pref("browser.taskbar.lists.tasks.enabled", false);
+//user_pref("browser.taskbar.lists.enabled", false);
+//user_pref("browser.taskbar.lists.frequent.enabled", false);
+//user_pref("browser.taskbar.lists.recent.enabled", false);
+//user_pref("browser.taskbar.lists.tasks.enabled", false);
 /* 0871: disable Windows taskbar preview [WINDOWS] ***/
-user_pref("browser.taskbar.previews.enable", false);
+//user_pref("browser.taskbar.previews.enable", false);
+
 
 /*** [SECTION 0900]: PASSWORDS ***/
 user_pref("_user.js.parrot", "0900 syntax error: the parrot's expired!");
@@ -546,10 +574,10 @@ user_pref("_user.js.parrot", "0900 syntax error: the parrot's expired!");
  * [1] https://support.mozilla.org/kb/use-master-password-protect-stored-logins ***/
 /* 0903: set how often Firefox should ask for the master password
  * 0=the first time (default), 1=every time it's needed, 2=every n minutes (see 0904) ***/
-user_pref("security.ask_for_password", 2);
+//user_pref("security.ask_for_password", 2);
 /* 0904: set how often in minutes Firefox should ask for the master password (see 0903)
  * in minutes, default is 30 ***/
-user_pref("security.password_lifetime", 5);
+//user_pref("security.password_lifetime", 5);
 /* 0905: disable auto-filling username & password form fields
  * can leak in cross-site forms *and* be spoofed
  * [NOTE] Username & password is still available when you enter the field
@@ -588,10 +616,22 @@ user_pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is m
  * or you use a hardened Temporary Containers, then feel free to override this
  * [NOTE] We also clear cache on exiting Firefox (see 2803) ***/
 user_pref("browser.cache.disk.enable", false);
+user_pref("browser.cache.disk.capacity", 800000);
+//user_pref("browser.cache.disk.max_entry_size", 51200); // 51200 default
+user_pref("browser.cache.disk.smart_size.enabled", false);
+//user_pref("browser.cache.disk.smart_size.first_run", false);
+/* 1002: disable disk cache for SSL pages
+ * [1] http://kb.mozillazine.org/Browser.cache.disk_cache_ssl ***/
+user_pref("browser.cache.disk_cache_ssl", false);
 /* 1003: disable memory cache
 /* capacity: -1=determine dynamically (default), 0=none, n=memory capacity in kilobytes ***/
-   // user_pref("browser.cache.memory.enable", false);
+   user_pref("browser.cache.memory.enable", true);
    // user_pref("browser.cache.memory.capacity", 0); // [HIDDEN PREF ESR]
+   // user_pref("browser.cache.memory.capacity", 1048576); // 1GB!
+   //user_pref("browser.cache.memory.max_entry_size", 512);
+  //user_pref("browser.cache.memory.max_entry_size", -1);  // Default=5120
+  //user_pref("browser.cache.compression_level", 4);
+
 /* 1006: disable permissions manager from writing to disk [RESTART]
  * [NOTE] This means any permission changes are session only
  * [1] https://bugzilla.mozilla.org/967812 ***/
@@ -614,7 +654,7 @@ user_pref("browser.sessionstore.privacy_level", 2);
  * i.e. the longer the interval the more chance a quick tab open/close won't be captured.
  * This longer interval *may* affect history but we cannot replicate any history not recorded
  * [1] https://bugzilla.mozilla.org/1304389 ***/
-user_pref("browser.sessionstore.interval", 30000);
+//user_pref("browser.sessionstore.interval", 30000);
 /* 1024: disable automatic Firefox start and session restore after reboot [FF62+] [WINDOWS]
  * [1] https://bugzilla.mozilla.org/603903 ***/
 user_pref("toolkit.winRegisterApplicationRestart", false);
@@ -675,21 +715,21 @@ user_pref("security.ssl.errorReporting.url", "");
 /* 1205: disable TLS1.3 0-RTT (round-trip time) [FF51+]
  * [1] https://github.com/tlswg/tls13-spec/issues/1001
  * [2] https://blog.cloudflare.com/tls-1-3-overview-and-q-and-a/ ***/
-user_pref("security.tls.enable_0rtt_data", false);
+//user_pref("security.tls.enable_0rtt_data", false); // (FF55+ default true)
 
 /** OCSP (Online Certificate Status Protocol)
     #Required reading [#] https://scotthelme.co.uk/revocation-is-broken/ ***/
 /* 1210: enable OCSP Stapling
  * [1] https://blog.mozilla.org/security/2013/07/29/ocsp-stapling-in-firefox/ ***/
-user_pref("security.ssl.enable_ocsp_stapling", true);
+//user_pref("security.ssl.enable_ocsp_stapling", true);
 /* 1211: control when to use OCSP fetching (to confirm current validity of certificates)
  * 0=disabled, 1=enabled (default), 2=enabled for EV certificates only
  * OCSP (non-stapled) leaks information about the sites you visit to the CA (cert authority)
  * It's a trade-off between security (checking) and privacy (leaking info to the CA)
  * [NOTE] This pref only controls OCSP fetching and does not affect OCSP stapling
  * [1] https://en.wikipedia.org/wiki/Ocsp ***/
-user_pref("security.OCSP.enabled", 1);
-/* 1212: set OCSP fetch failures (non-stapled, see 1211) to hard-fail [SETUP-WEB]
+//user_pref("security.OCSP.enabled", 1);
+/* 1212: set OCSP fetch failures (non-stapled, see 1211) to hard-fail
  * When a CA cannot be reached to validate a cert, Firefox just continues the connection (=soft-fail)
  * Setting this pref to true tells Firefox to instead terminate the connection (=hard-fail)
  * It is pointless to soft-fail when an OCSP fetch fails: you cannot confirm a cert is still valid (it
@@ -708,7 +748,7 @@ user_pref("security.OCSP.require", true);
  * [SETUP-CHROME] When disabled, some man-in-the-middle devices (e.g. security scanners and
  * antivirus products, may fail to connect to HTTPS sites. SHA-1 is *almost* obsolete.
  * [1] https://blog.mozilla.org/security/2016/10/18/phasing-out-sha-1-on-the-public-web/ ***/
-user_pref("security.pki.sha1_enforcement_level", 1);
+//user_pref("security.pki.sha1_enforcement_level", 1);
 /* 1221: disable Windows 8.1's Microsoft Family Safety cert [FF50+] [WINDOWS]
  * 0=disable detecting Family Safety mode and importing the root
  * 1=only attempt to detect Family Safety mode (don't import the root)
@@ -732,7 +772,7 @@ user_pref("security.cert_pinning.enforcement_level", 2);
  * [1] https://trac.torproject.org/projects/tor/ticket/21323 ***/
 user_pref("security.mixed_content.block_active_content", true); // [DEFAULT: true]
 /* 1241: disable insecure passive content (such as images) on https pages [SETUP-WEB] ***/
-user_pref("security.mixed_content.block_display_content", true);
+//user_pref("security.mixed_content.block_display_content", true);
 /* 1243: block unencrypted requests from Flash on encrypted pages to mitigate MitM attacks [FF59+]
  * [1] https://bugzilla.mozilla.org/1190623 ***/
 user_pref("security.mixed_content.block_object_subrequest", true);
@@ -763,15 +803,15 @@ user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 /* 1271: control "Add Security Exception" dialog on SSL warnings
  * 0=do neither 1=pre-populate url 2=pre-populate url + pre-fetch cert (default)
  * [1] https://github.com/pyllyukko/user.js/issues/210 ***/
-user_pref("browser.ssl_override_behavior", 1);
+//user_pref("browser.ssl_override_behavior", 1);
 /* 1272: display advanced information on Insecure Connection warning pages
  * only works when it's possible to add an exception
  * i.e. it doesn't work for HSTS discrepancies (https://subdomain.preloaded-hsts.badssl.com/)
  * [TEST] https://expired.badssl.com/ ***/
 user_pref("browser.xul.error_pages.expert_bad_cert", true);
 /* 1273: display "insecure" icon and "Not Secure" text on HTTP sites ***/
-user_pref("security.insecure_connection_icon.enabled", true); // [FF59+] [DEFAULT: true FF70+]
-user_pref("security.insecure_connection_text.enabled", true); // [FF60+]
+//user_pref("security.insecure_connection_icon.enabled", true); // [FF59+] [DEFAULT: true FF70+]
+user_pref("security.insecure_connection_text.enabled", false); // [FF60+]
 
 /*** [SECTION 1400]: FONTS ***/
 user_pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
@@ -779,7 +819,7 @@ user_pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
  * This can limit most (but not all) JS font enumeration which is a high entropy fingerprinting vector
  * [SETUP-WEB] Disabling fonts can uglify the web a fair bit.
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Allow pages to choose... ***/
-user_pref("browser.display.use_document_fonts", 0);
+//user_pref("browser.display.use_document_fonts", 0);
 /* 1403: disable icon fonts (glyphs) and local fallback rendering
  * [1] https://bugzilla.mozilla.org/789788
  * [2] https://trac.torproject.org/projects/tor/ticket/8455 ***/
@@ -787,7 +827,7 @@ user_pref("browser.display.use_document_fonts", 0);
    // user_pref("gfx.downloadable_fonts.fallback_delay", -1);
 /* 1404: disable rendering of SVG OpenType fonts
  * [1] https://wiki.mozilla.org/SVGOpenTypeFonts - iSECPartnersReport recommends to disable this ***/
-user_pref("gfx.font_rendering.opentype_svg.enabled", false);
+//user_pref("gfx.font_rendering.opentype_svg.enabled", false);
 /* 1408: disable graphite
  * Graphite has had many critical security issues in the past, see [1]
  * [1] https://www.mozilla.org/security/advisories/mfsa2017-15/#CVE-2017-7778
@@ -840,8 +880,8 @@ user_pref("network.http.referer.XOriginTrimmingPolicy", 0); // [DEFAULT: 0]
  * [1] https://www.w3.org/TR/referrer-policy/
  * [2] https://developer.mozilla.org/docs/Web/HTTP/Headers/Referrer-Policy
  * [3] https://blog.mozilla.org/security/2018/01/31/preventing-data-leaks-by-stripping-path-information-in-http-referrers/ ***/
-   // user_pref("network.http.referer.defaultPolicy", 3); // [DEFAULT: 3]
-   // user_pref("network.http.referer.defaultPolicy.pbmode", 2); // [DEFAULT: 2]
+   user_pref("network.http.referer.defaultPolicy", 2); // [DEFAULT: 3]
+   user_pref("network.http.referer.defaultPolicy.pbmode", 1); // [DEFAULT: 2]
 /* 1607: TOR: hide (not spoof) referrer when leaving a .onion domain [FF54+]
  * [NOTE] Firefox cannot access .onion sites by default. We recommend you use
  * the Tor Browser which is specifically designed for hidden services
@@ -914,12 +954,12 @@ user_pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true); // [FF70
  * especially with readPixels(). Some of the other entropy is lessened with RFP (see 4501)
  * [1] https://www.contextis.com/resources/blog/webgl-new-dimension-browser-exploitation/
  * [2] https://security.stackexchange.com/questions/13799/is-webgl-a-security-concern ***/
-user_pref("webgl.disabled", true);
-user_pref("webgl.enable-webgl2", false);
+//user_pref("webgl.disabled", true);
+//user_pref("webgl.enable-webgl2", false);
 /* 2012: limit WebGL ***/
-user_pref("webgl.min_capability_mode", true);
-user_pref("webgl.disable-extensions", true);
-user_pref("webgl.disable-fail-if-major-performance-caveat", true);
+//user_pref("webgl.min_capability_mode", true);
+//user_pref("webgl.disable-extensions", true);
+//user_pref("webgl.disable-fail-if-major-performance-caveat", true);
 /* 2022: disable screensharing ***/
 user_pref("media.getusermedia.screensharing.enabled", false);
 user_pref("media.getusermedia.browser.enabled", false);
@@ -1033,7 +1073,7 @@ user_pref("_user.js.parrot", "2400 syntax error: the parrot's kicked the bucket!
  * is default false) then enabling this pref can leak clipboard content, see [2]
  * [1] https://www.ghacks.net/2014/01/08/block-websites-reading-modifying-clipboard-contents-firefox/
  * [2] https://bugzilla.mozilla.org/1528289 */
-user_pref("dom.event.clipboardevents.enabled", false);
+//user_pref("dom.event.clipboardevents.enabled", false);
 /* 2404: disable clipboard commands (cut/copy) from "non-privileged" content [FF41+]
  * this disables document.execCommand("cut"/"copy") to protect your clipboard
  * [1] https://bugzilla.mozilla.org/1170911 ***/
@@ -1052,7 +1092,7 @@ user_pref("dom.vibrator.enabled", false);
  * [4] https://www.mozilla.org/security/advisories/mfsa2017-01/#CVE-2017-5375
  * [5] https://www.mozilla.org/security/advisories/mfsa2017-05/#CVE-2017-5400
  * [6] https://rh0dev.github.io/blog/2017/the-return-of-the-jit/ ***/
-user_pref("javascript.options.asmjs", false);
+///user_pref("javascript.options.asmjs", false);
 /* 2421: disable Ion and baseline JIT to help harden JS against exploits
  * [WARNING] If false, causes the odd site issue and there is also a performance loss
  * [1] https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0817 ***/
@@ -1061,7 +1101,7 @@ user_pref("javascript.options.asmjs", false);
 /* 2422: disable WebAssembly [FF52+] [SETUP-PERF]
  * [NOTE] In FF71+ this no longer affects extensions (1576254)
  * [1] https://developer.mozilla.org/docs/WebAssembly ***/
-user_pref("javascript.options.wasm", false);
+///user_pref("javascript.options.wasm", false);
 /* 2426: disable Intersection Observer API [FF55+]
  * [1] https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API
  * [2] https://w3c.github.io/IntersectionObserver/
@@ -1094,7 +1134,7 @@ user_pref("media.navigator.enabled", false);
    // user_pref("layers.acceleration.disabled", true);
 /* 2510: disable Web Audio API [FF51+]
  * [1] https://bugzilla.mozilla.org/1288359 ***/
-user_pref("dom.webaudio.enabled", false);
+///user_pref("dom.webaudio.enabled", false);
 /* 2517: disable Media Capabilities API [FF63+]
  * [WARNING] This *may* affect media performance if disabled, no one is sure
  * [1] https://github.com/WICG/media-capabilities
@@ -1128,14 +1168,14 @@ user_pref("browser.pagethumbnails.capturing_disabled", true); // [HIDDEN PREF]
 /* 2605: block web content in file processes [FF55+]
  * [SETUP-WEB] You may want to disable this for corporate or developer environments
  * [1] https://bugzilla.mozilla.org/1343184 ***/
-user_pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
+///user_pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
 /* 2606: disable UITour backend so there is no chance that a remote page can use it ***/
 user_pref("browser.uitour.enabled", false);
 user_pref("browser.uitour.url", "");
 /* 2607: disable various developer tools in browser context
  * [SETTING] Devtools>Advanced Settings>Enable browser chrome and add-on debugging toolboxes
  * [1] https://github.com/pyllyukko/user.js/issues/179#issuecomment-246468676 ***/
-user_pref("devtools.chrome.enabled", false);
+///user_pref("devtools.chrome.enabled", false);
 /* 2608: disable remote debugging
  * [1] https://trac.torproject.org/projects/tor/ticket/16222 ***/
 user_pref("devtools.debugger.remote-enabled", false);
@@ -1192,7 +1232,7 @@ user_pref("network.protocol-handler.external.ms-windows-store", false);
 /* 2650: discourage downloading to desktop
  * 0=desktop, 1=downloads (default), 2=last used
  * [SETTING] To set your default "downloads": General>Downloads>Save files to ***/
-   // user_pref("browser.download.folderList", 2);
+   user_pref("browser.download.folderList", 2);
 /* 2651: enforce user interaction for security by always asking where to download
  * [SETUP-CHROME] On Android this blocks longtapping and saving images
  * [SETTING] General>Downloads>Always ask you where to save files ***/
@@ -1303,11 +1343,11 @@ user_pref("privacy.sanitize.sanitizeOnShutdown", true);
  * However, this may not always be the case. The interface combines and syncs these
  * prefs when set from there, and the sanitize code may change at any time
  * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes>Settings ***/
-user_pref("privacy.clearOnShutdown.cache", true);
+//user_pref("privacy.clearOnShutdown.cache", true);
 user_pref("privacy.clearOnShutdown.cookies", true);
 user_pref("privacy.clearOnShutdown.downloads", true); // see note above
-user_pref("privacy.clearOnShutdown.formdata", true); // Form & Search History
-user_pref("privacy.clearOnShutdown.history", true); // Browsing & Download History
+user_pref("privacy.clearOnShutdown.formdata", false); // Form & Search History
+user_pref("privacy.clearOnShutdown.history", false); // Browsing & Download History
 user_pref("privacy.clearOnShutdown.offlineApps", true); // Offline Website Data
 user_pref("privacy.clearOnShutdown.sessions", true); // Active Logins
 user_pref("privacy.clearOnShutdown.siteSettings", false); // Site Preferences
@@ -1316,7 +1356,7 @@ user_pref("privacy.clearOnShutdown.siteSettings", false); // Site Preferences
  * Firefox remembers your last choices. This will reset them when you start Firefox.
  * [NOTE] Regardless of what you set privacy.cpd.downloads to, as soon as the dialog
  * for "Clear Recent History" is opened, it is synced to the same as 'history' ***/
-user_pref("privacy.cpd.cache", true);
+user_pref("privacy.cpd.cache", false);
 user_pref("privacy.cpd.cookies", true);
    // user_pref("privacy.cpd.downloads", true); // not used, see note above
 user_pref("privacy.cpd.formdata", true); // Form & Search History
@@ -1363,7 +1403,7 @@ user_pref("_user.js.parrot", "4000 syntax error: the parrot's pegged out");
 /* 4001: enable First Party Isolation [FF51+]
  * [SETUP-WEB] May break cross-domain logins and site functionality until perfected
  * [1] https://bugzilla.mozilla.org/1260931 ***/
-user_pref("privacy.firstparty.isolate", true);
+//user_pref("privacy.firstparty.isolate", true);
 /* 4002: enforce FPI restriction for window.opener [FF54+]
  * [NOTE] Setting this to false may reduce the breakage in 4001
  * FF65+ blocks postMessage with targetOrigin "*" if originAttributes don't match. But
@@ -1512,7 +1552,7 @@ user_pref("dom.enable_performance", false);
    // Zoom levels affect screen res and are highly fingerprintable. This does not stop you using
    // zoom, it will just not use/remember any site specific settings. Zoom levels on new tabs
    // and new windows are reset to default and only the current tab retains the current zoom
-user_pref("browser.zoom.siteSpecific", false);
+//user_pref("browser.zoom.siteSpecific", false);
 // 4606: [2501] disable gamepad API - USB device ID enumeration
    // Optional protection depending on your connected devices
    // [1] https://trac.torproject.org/projects/tor/ticket/13023
@@ -1533,7 +1573,7 @@ user_pref("media.webspeech.synth.enabled", false);
 // 4610: [2506] disable video statistics - JS performance fingerprinting [FF25+]
    // [1] https://trac.torproject.org/projects/tor/ticket/15757
    // [2] https://bugzilla.mozilla.org/654550
-user_pref("media.video_stats.enabled", false);
+//user_pref("media.video_stats.enabled", false);
 // 4611: [2509] disable touch events
    // fingerprinting attack vector - leaks screen res & actual screen coordinates
    // 0=disabled, 1=enabled, 2=autodetect
