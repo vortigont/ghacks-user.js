@@ -1,4 +1,7 @@
-// ********** General profile Settings *******
+// ********** Ugly Settings *******
+// !!!uses very relaxed and even unsafe and some dangerous setting!!!
+// mostly used for some really dumb sites
+// tries to be as session-only as possible, no leftovers
 
 // misc settings
 // disable updating system addons
@@ -22,6 +25,9 @@ user_pref("datareporting.healthreport.logging.consoleEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled.v2", false);
 
+/* very ugly settings that spoils security, but sometimes you need it */
+// allow mixed https and non-https content on the same page
+user_pref("security.mixed_content.block_active_content", false);
 
 
 /******
@@ -306,7 +312,7 @@ user_pref("_user.js.parrot", "0400 syntax error: the parrot's passed on!");
  * [NOTE] It includes updates for "revoked certificates"
  * [1] https://blog.mozilla.org/security/2015/03/03/revoking-intermediate-certificates-introducing-onecrl/
  * [2] https://trac.torproject.org/projects/tor/ticket/16931 ***/
-user_pref("extensions.blocklist.enabled", true); // [DEFAULT: true]
+user_pref("extensions.blocklist.enabled", false); // [DEFAULT: true]
 user_pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%APP_ID%/%APP_VERSION%/");
 
 /** SAFE BROWSING (SB)
@@ -387,10 +393,10 @@ user_pref("browser.ping-centre.telemetry", false);
  * [SETTING] Privacy & Security>Forms and Autofill>Autofill addresses (FF74+)
  * [1] https://wiki.mozilla.org/Firefox/Features/Form_Autofill
  * [2] https://www.ghacks.net/2017/05/24/firefoxs-new-form-autofill-is-awesome/ ***/
-//user_pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
-//user_pref("extensions.formautofill.available", "off"); // [FF56+]
+user_pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
+user_pref("extensions.formautofill.available", "off"); // [FF56+]
 user_pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
-//user_pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
+user_pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
 /* 0518: disable Web Compatibility Reporter [FF56+]
  * Web Compatibility Reporter adds a "Report Site Issue" button to send data to Mozilla ***/
 user_pref("extensions.webcompat-reporter.enabled", false);
@@ -567,7 +573,7 @@ user_pref("_user.js.parrot", "0900 syntax error: the parrot's expired!");
 /* 0901: disable saving passwords
  * [NOTE] This does not clear any passwords already saved
  * [SETTING] Privacy & Security>Logins and Passwords>Ask to save logins and passwords for websites ***/
-   // user_pref("signon.rememberSignons", false);
+   user_pref("signon.rememberSignons", false);
 /* 0902: use a master password
  * There are no preferences for this. It is all handled internally.
  * [SETTING] Privacy & Security>Logins and Passwords>Use a master password
@@ -626,8 +632,7 @@ user_pref("browser.cache.disk_cache_ssl", false);
 /* 1003: disable memory cache
 /* capacity: -1=determine dynamically (default), 0=none, n=memory capacity in kilobytes ***/
    user_pref("browser.cache.memory.enable", true);
-   // user_pref("browser.cache.memory.capacity", 0); // [HIDDEN PREF ESR]
-   // user_pref("browser.cache.memory.capacity", 1048576); // 1GB!
+   user_pref("browser.cache.memory.capacity", 524288); //524288 512MB!
    //user_pref("browser.cache.memory.max_entry_size", 512);
   //user_pref("browser.cache.memory.max_entry_size", -1);  // Default=5120
   //user_pref("browser.cache.compression_level", 4);
@@ -866,7 +871,7 @@ user_pref("_user.js.parrot", "1600 syntax error: the parrot rests in peace!");
 /* 1603: CROSS ORIGIN: control when to send a referer
  * 0=always (default), 1=only if base domains match, 2=only if hosts match
  * [SETUP-WEB] Known to cause issues with older modems/routers and some sites e.g vimeo, icloud ***/
-user_pref("network.http.referer.XOriginPolicy", 1);
+user_pref("network.http.referer.XOriginPolicy", 0);
 /* 1604: CROSS ORIGIN: control the amount of information to send [FF52+]
  * 0=send full URI (default), 1=scheme+host+port+path, 2=scheme+host+port ***/
 user_pref("network.http.referer.XOriginTrimmingPolicy", 0); // [DEFAULT: 0]
@@ -880,8 +885,8 @@ user_pref("network.http.referer.XOriginTrimmingPolicy", 0); // [DEFAULT: 0]
  * [1] https://www.w3.org/TR/referrer-policy/
  * [2] https://developer.mozilla.org/docs/Web/HTTP/Headers/Referrer-Policy
  * [3] https://blog.mozilla.org/security/2018/01/31/preventing-data-leaks-by-stripping-path-information-in-http-referrers/ ***/
-   user_pref("network.http.referer.defaultPolicy", 2); // [DEFAULT: 3]
-   user_pref("network.http.referer.defaultPolicy.pbmode", 1); // [DEFAULT: 2]
+   user_pref("network.http.referer.defaultPolicy", 3); // [DEFAULT: 3]
+   user_pref("network.http.referer.defaultPolicy.pbmode", 2); // [DEFAULT: 2]
 /* 1607: TOR: hide (not spoof) referrer when leaving a .onion domain [FF54+]
  * [NOTE] Firefox cannot access .onion sites by default. We recommend you use
  * the Tor Browser which is specifically designed for hidden services
@@ -1290,7 +1295,7 @@ user_pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin
  * [NOTE] You can set exceptions under site permissions or use an extension
  * [NOTE] Enforcing category to custom ensures ETP related prefs are always honored
  * [SETTING] Privacy & Security>Enhanced Tracking Protection>Custom>Cookies ***/
-user_pref("network.cookie.cookieBehavior", 1);
+user_pref("network.cookie.cookieBehavior", 0);
 user_pref("browser.contentblocking.category", "custom");
 /* 2702: set third-party cookies (i.e ALL) (if enabled, see 2701) to session-only
    and (FF58+) set third-party non-secure (i.e HTTP) cookies to session-only
@@ -1303,7 +1308,7 @@ user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
  * 0=keep until they expire (default), 2=keep until you close Firefox
  * [NOTE] The setting below is disabled (but not changed) if you block all cookies (2701 = 2)
  * [SETTING] Privacy & Security>Cookies and Site Data>Delete cookies and site data when Firefox is closed ***/
-   // user_pref("network.cookie.lifetimePolicy", 2);
+   user_pref("network.cookie.lifetimePolicy", 2);
 /* 2710: disable DOM (Document Object Model) Storage
  * [WARNING] This will break a LOT of sites' functionality AND extensions!
  * You are better off using an extension for more granular control ***/
@@ -1313,7 +1318,7 @@ user_pref("browser.cache.offline.enable", false);
 /* 2740: disable service worker cache and cache storage
  * [NOTE] We clear service worker cache on exiting Firefox (see 2803)
  * [1] https://w3c.github.io/ServiceWorker/#privacy ***/
-   // user_pref("dom.caches.enabled", false);
+   user_pref("dom.caches.enabled", false);
 /* 2750: disable Storage API [FF51+]
  * The API gives sites the ability to find out how much space they can use, how much
  * they are already using, and even control whether or not they need to be alerted
@@ -1343,11 +1348,11 @@ user_pref("privacy.sanitize.sanitizeOnShutdown", true);
  * However, this may not always be the case. The interface combines and syncs these
  * prefs when set from there, and the sanitize code may change at any time
  * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes>Settings ***/
-//user_pref("privacy.clearOnShutdown.cache", true);
+user_pref("privacy.clearOnShutdown.cache", true);
 user_pref("privacy.clearOnShutdown.cookies", true);
 user_pref("privacy.clearOnShutdown.downloads", true); // see note above
-user_pref("privacy.clearOnShutdown.formdata", false); // Form & Search History
-user_pref("privacy.clearOnShutdown.history", false); // Browsing & Download History
+user_pref("privacy.clearOnShutdown.formdata", true); // Form & Search History
+user_pref("privacy.clearOnShutdown.history", true); // Browsing & Download History
 user_pref("privacy.clearOnShutdown.offlineApps", true); // Offline Website Data
 user_pref("privacy.clearOnShutdown.sessions", true); // Active Logins
 user_pref("privacy.clearOnShutdown.siteSettings", false); // Site Preferences
