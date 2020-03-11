@@ -832,7 +832,7 @@ user_pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
  * Graphite has had many critical security issues in the past, see [1]
  * [1] https://www.mozilla.org/security/advisories/mfsa2017-15/#CVE-2017-7778
  * [2] https://en.wikipedia.org/wiki/Graphite_(SIL) ***/
-user_pref("gfx.font_rendering.graphite.enabled", false);
+user_pref("gfx.font_rendering.graphite.enabled", true);
 /* 1409: limit system font exposure to a whitelist [FF52+] [RESTART]
  * If the whitelist is empty, then whitelisting is considered disabled and all fonts are allowed.
  * [WARNING] Creating your own probably highly-unique whitelist will raise your entropy.
