@@ -1106,6 +1106,7 @@ user_pref("dom.vibrator.enabled", false);
  * [1] https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API
  * [2] https://w3c.github.io/IntersectionObserver/
  * [3] https://bugzilla.mozilla.org/1243846 ***/
+///  KEEP THIS! otherwise breaks netmon network monitor
    // user_pref("dom.IntersectionObserver.enabled", false);
 /* 2429: enable (limited but sufficient) window.opener protection [FF65+]
  * Makes rel=noopener implicit for target=_blank in anchor and area elements when no rel attribute is set ***/
