@@ -1,6 +1,10 @@
 // ********** General profile Settings *******
 
 // misc settings
+
+// run networking in a separate process
+user_pref("network.process.enabled", true);
+
 // disable updating system addons
 user_pref("extensions.systemAddon.update.enabled", false);
 user_pref("devtools.aboutdebugging.showSystemAddons", true);
