@@ -26,6 +26,11 @@ user_pref("datareporting.healthreport.logging.consoleEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled.v2", false);
 
+// disable searchbar to url bar handoff
+user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar", false);
+
+// merino ad service
+user_pref("browser.urlbar.merino.enabled", false);
 
 
 /******
