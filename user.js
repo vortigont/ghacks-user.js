@@ -31,6 +31,7 @@ user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar"
 
 // merino ad service
 user_pref("browser.urlbar.merino.enabled", false);
+user_pref("browser.urlbar.merino.endpointURL", "");
 
 
 /******
@@ -745,7 +746,7 @@ user_pref("security.ssl.errorReporting.url", "");
  * could have been revoked) and/or you could be under attack (e.g. malicious blocking of OCSP servers)
  * [1] https://blog.mozilla.org/security/2013/07/29/ocsp-stapling-in-firefox/
  * [2] https://www.imperialviolet.org/2014/04/19/revchecking.html ***/
-user_pref("security.OCSP.require", true);
+user_pref("security.OCSP.require", false);		// this gives lot's of false positives
 
 /** CERTS / HPKP (HTTP Public Key Pinning) ***/
 /* 1220: disable or limit SHA-1 certificates
