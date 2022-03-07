@@ -33,6 +33,19 @@ user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar"
 user_pref("browser.urlbar.merino.enabled", false);
 user_pref("browser.urlbar.merino.endpointURL", "");
 
+// Enable VAAPI for linux
+user_pref("media.ffmpeg.vaapi.enabled", true);
+/*
+check HW decoder with
+MOZ_LOG="PlatformDecoderModule:5" firefox | grep "VA-API|FFVPX"
+
+example:
+[RDD 114443: MediaPDecoder #1]: D/PlatformDecoderModule FFVPX: Initialising VA-API FFmpeg decoder
+libva info: VA-API version 1.12.0
+[AVHWDeviceContext @ 0x7f7f0bebd840] VAAPI driver: Intel iHD driver for Intel(R) Gen Graphics - 21.3.3 ().
+
+*/
+
 
 /******
 * name: ghacks user.js
