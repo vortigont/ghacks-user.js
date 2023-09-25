@@ -28,10 +28,21 @@ user_pref("datareporting.policy.dataSubmissionEnabled.v2", false);
 
 // disable searchbar to url bar handoff
 user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar", false);
+// disable removing 'https://' prefix from URL bar
+user_pref("browser.urlbar.trimHttps", false);
+// disable additional text "Not secure" for http:// URLs
+user_pref("security.insecure_connection_text.enabled", false);
 
 // merino ad service
 user_pref("browser.urlbar.merino.enabled", false);
 user_pref("browser.urlbar.merino.endpointURL", "");
+
+// import system certs
+user_pref("security.enterprise_roots.enabled", false);
+user_pref("security.certerrors.mitm.auto_enable_enterprise_roots);
+
+// do not select space after word
+user_pref("layout.word_select.eat_space_to_next_word");
 
 // Enable VAAPI for linux
 user_pref("media.ffmpeg.vaapi.enabled", true);
