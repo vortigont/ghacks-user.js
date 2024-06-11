@@ -2,6 +2,9 @@
 
 // misc settings
 
+// allow Brotly & zstd over plain http
+user_pref("network.http.accept-encoding", "gzip, deflate, br, zstd");
+
 // run networking in a separate process
 user_pref("network.process.enabled", true);
 
