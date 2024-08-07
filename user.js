@@ -8,9 +8,6 @@ user_pref("dom.security.https_first");
 // allow Brotly & zstd over plain http
 user_pref("network.http.accept-encoding", "gzip, deflate, br, zstd");
 
-// run networking in a separate process
-user_pref("network.process.enabled", true);
-
 // disable updating system addons
 user_pref("extensions.systemAddon.update.enabled", false);
 user_pref("devtools.aboutdebugging.showSystemAddons", true);
