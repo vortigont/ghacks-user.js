@@ -2,6 +2,9 @@
 
 // misc settings
 
+// disable converting http requests to https on first attemps
+user_pref("dom.security.https_first");
+
 // allow Brotly & zstd over plain http
 user_pref("network.http.accept-encoding", "gzip, deflate, br, zstd");
 
