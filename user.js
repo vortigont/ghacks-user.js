@@ -2,12 +2,12 @@
 
 // misc settings
 
+// disable converting http requests to https on first attemps
+user_pref("dom.security.https_first");
+
 // allow Brotly & zstd over plain http
 user_pref("network.http.accept-encoding", "gzip, deflate, br, zstd");
 user_pref("dom.compression_streams.zstd.enabled", true);
-
-// run networking in a separate process
-user_pref("network.process.enabled", true);
 
 // disable updating system addons
 user_pref("extensions.systemAddon.update.enabled", false);
